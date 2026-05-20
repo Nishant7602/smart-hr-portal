@@ -1,0 +1,30 @@
+# Java / Maven
+target/
+*.class
+*.jar
+*.war
+.mvn/
+!.mvn/wrapper/maven-wrapper.jar
+.settings/
+.project
+.classpath
+*.iml
+.idea/
+
+# Spring Boot
+application-local.yml
+uploads/
+
+# Node / React
+node_modules/
+build/
+.env
+.env.local
+.DS_Store
+npm-debug.log*
+
+# Docker
+.env
+
+# Misc
+*.log

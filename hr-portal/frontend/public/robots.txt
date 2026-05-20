@@ -1,0 +1,8 @@
+# SmartHR Portal
+User-agent: *
+Disallow: /dashboard
+Disallow: /applicants
+Disallow: /interviews
+Disallow: /ai-tools
+Allow: /apply/
+Allow: /login
