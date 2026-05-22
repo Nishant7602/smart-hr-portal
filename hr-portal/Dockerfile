@@ -1,3 +1,6 @@
+bash
+
+cat > /home/claude/hr-portal/Dockerfile << 'EOF'
 # ═══════════════════════════════════════════════════════════════
 #  SmartHR Portal — Single Dockerfile (React + Spring Boot)
 #  Location: hr-portal/Dockerfile
@@ -8,10 +11,16 @@
 FROM node:18-alpine AS frontend-build
 WORKDIR /frontend
 COPY frontend/package*.json ./
-RUN npm install --legacy-peer-deps
+
+# Fix ajv/react-scripts conflict
+RUN npm install --legacy-peer-deps && \
+    npm install ajv@^8.0.0 --legacy-peer-deps
+
 COPY frontend/ ./
 ENV REACT_APP_API_URL=/api
 ENV CI=false
+ENV GENERATE_SOURCEMAP=false
+ENV NODE_OPTIONS=--openssl-legacy-provider
 RUN npm run build
 
 # ── Stage 2: Build Spring Boot Backend ───────────────────────
@@ -30,3 +39,5 @@ COPY --from=backend-build /app/target/*.jar app.jar
 RUN mkdir -p /app/uploads/resumes
 EXPOSE 8080
 ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","app.jar"]
+EOF
+echo "✅ Dockerfile updated"
