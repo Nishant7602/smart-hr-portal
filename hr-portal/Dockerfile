@@ -1,6 +1,4 @@
 
-
-cat > /home/claude/hr-portal/Dockerfile << 'EOF'
 # ═══════════════════════════════════════════════════════════════
 #  SmartHR Portal — Single Dockerfile (React + Spring Boot)
 #  Location: hr-portal/Dockerfile
