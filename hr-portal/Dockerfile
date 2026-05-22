@@ -37,5 +37,5 @@ COPY --from=backend-build /app/target/*.jar app.jar
 RUN mkdir -p /app/uploads/resumes
 EXPOSE 8080
 ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","app.jar"]
-EOF
+
 echo "✅ Dockerfile updated"
