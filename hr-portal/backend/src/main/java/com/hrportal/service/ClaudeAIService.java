@@ -266,7 +266,7 @@ public class ClaudeAIService {
                 "Get a free key at: https://aistudio.google.com");
         }
 
-        String geminiUrl = "https://generativelanguage.googleapis.com/v1beta/models/" +
+        String geminiUrl = "https://generativelanguage.googleapis.com/v1/models/" +
             "gemini-2.0-flash:generateContent?key=" + apiKey;
 
         HttpHeaders headers = new HttpHeaders();
