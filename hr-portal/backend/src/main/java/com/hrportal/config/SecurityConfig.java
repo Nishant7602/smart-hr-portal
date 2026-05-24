@@ -41,15 +41,21 @@ public class SecurityConfig {
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
             .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/auth/**").permitAll()
-                .requestMatchers(HttpMethod.GET, "/api/jobs", "/api/jobs/{id}", "/api/jobs/departments").permitAll()
-                .requestMatchers(HttpMethod.POST, "/api/applicants/job/**").permitAll()
-                .requestMatchers("/h2-console/**").permitAll()
-                .requestMatchers("/swagger-ui/**", "/api-docs/**", "/swagger-ui.html").permitAll()
-                .requestMatchers("/actuator/health").permitAll()
-                .requestMatchers("/api/admin/**").hasRole("HR_ADMIN")
-                .anyRequest().authenticated()
-            )
+            	    // Public API endpoints
+            	    .requestMatchers("/api/auth/**").permitAll()
+            	    .requestMatchers(HttpMethod.GET, "/api/jobs", "/api/jobs/{id}", "/api/jobs/departments").permitAll()
+            	    .requestMatchers(HttpMethod.POST, "/api/applicants/job/**").permitAll()
+            	    .requestMatchers("/swagger-ui/**", "/api-docs/**", "/swagger-ui.html").permitAll()
+            	    .requestMatchers("/actuator/health", "/actuator/info").permitAll()
+            	    // React static files — allow everything NOT /api/
+            	    .requestMatchers("/", "/index.html", "/static/**",
+            	            "/*.js", "/*.css", "/*.ico", "/*.png",
+            	            "/*.json", "/*.map", "/manifest.json").permitAll()
+            	    // All /api/** needs auth
+            	    .requestMatchers("/api/**").authenticated()
+            	    // React routes (/login, /dashboard etc.) — permit
+            	    .anyRequest().permitAll()
+            	)
             .headers(h -> h.frameOptions(f -> f.disable()))
             .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
             .build();
@@ -58,7 +64,12 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(List.of("http://localhost:3000", "http://localhost:5173", "http://localhost:3001"));
+        config.setAllowedOrigins(List.of(
+        	    "http://localhost:3000",
+        	    "http://localhost:5173",
+        	    "http://localhost:3001",
+        	    "https://smart-hr-portal-nhtt.onrender.com"
+        	));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
         config.setAllowCredentials(true);
