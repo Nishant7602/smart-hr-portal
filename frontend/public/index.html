@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#4f46e5" />
+    <meta
+      name="description"
+      content="SmartHR Portal – AI-Powered Recruitment & HR Management System built with Spring Boot and React"
+    />
+
+    <!-- Favicon: a simple emoji-based SVG favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%234f46e5'/><text y='.9em' font-size='70' x='12'>🏢</text></svg>" />
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%234f46e5'/><text y='.9em' font-size='70' x='12'>🏢</text></svg>" />
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>SmartHR Portal – AI-Powered Recruitment</title>
+
+    <style>
+      /* ── Critical inline styles for the loading screen ── */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html,
+      body {
+        height: 100%;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+          Roboto, Oxygen, Ubuntu, sans-serif;
+        background: #f9fafb;
+        color: #1f2937;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      #root {
+        height: 100%;
+      }
+
+      /* ── App loading splash screen (shown before React mounts) ── */
+      #app-loader {
+        position: fixed;
+        inset: 0;
+        background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4338ca 100%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 24px;
+        z-index: 9999;
+        transition: opacity 0.4s ease, visibility 0.4s ease;
+      }
+
+      #app-loader.hidden {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+      }
+
+      .loader-logo {
+        width: 72px;
+        height: 72px;
+        background: rgba(255, 255, 255, 0.15);
+        border-radius: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 36px;
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        animation: pulse 2s ease-in-out infinite;
+      }
+
+      .loader-title {
+        color: white;
+        font-size: 24px;
+        font-weight: 800;
+        letter-spacing: -0.5px;
+      }
+
+      .loader-subtitle {
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 13px;
+        margin-top: -16px;
+      }
+
+      .loader-spinner {
+        width: 36px;
+        height: 36px;
+        border: 3px solid rgba(255, 255, 255, 0.2);
+        border-top-color: white;
+        border-radius: 50%;
+        animation: spin 0.7s linear infinite;
+      }
+
+      .loader-dots {
+        display: flex;
+        gap: 6px;
+      }
+
+      .loader-dots span {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.5);
+        animation: bounce 0.8s ease-in-out infinite alternate;
+      }
+
+      .loader-dots span:nth-child(2) {
+        animation-delay: 0.15s;
+      }
+
+      .loader-dots span:nth-child(3) {
+        animation-delay: 0.3s;
+      }
+
+      .loader-tagline {
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .loader-tagline::before,
+      .loader-tagline::after {
+        content: '';
+        display: block;
+        width: 32px;
+        height: 1px;
+        background: rgba(255, 255, 255, 0.2);
+      }
+
+      @keyframes spin {
+        to { transform: rotate(360deg); }
+      }
+
+      @keyframes pulse {
+        0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255,255,255,0.2); }
+        50% { transform: scale(1.05); box-shadow: 0 0 0 12px rgba(255,255,255,0); }
+      }
+
+      @keyframes bounce {
+        from { transform: translateY(0); opacity: 0.5; }
+        to   { transform: translateY(-8px); opacity: 1; }
+      }
+
+      /* ── No-JS fallback ── */
+      noscript .noscript-msg {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        font-size: 16px;
+        color: #6b7280;
+        text-align: center;
+        padding: 40px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- No JavaScript fallback -->
+    <noscript>
+      <div class="noscript-msg">
+        <div>
+          <div style="font-size: 48px; margin-bottom: 16px;">⚠️</div>
+          <h2 style="color: #1f2937; margin-bottom: 8px;">JavaScript Required</h2>
+          <p>SmartHR Portal requires JavaScript to run.<br />
+          Please enable JavaScript in your browser and refresh the page.</p>
+        </div>
+      </div>
+    </noscript>
+
+    <!-- App loading splash (auto-hidden once React mounts) -->
+    <div id="app-loader" aria-label="Loading SmartHR Portal" role="status">
+      <div class="loader-logo">🏢</div>
+      <div>
+        <div class="loader-title">SmartHR Portal</div>
+        <div class="loader-subtitle">AI-Powered Recruitment Platform</div>
+      </div>
+      <div class="loader-dots">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div class="loader-tagline">Powered by Claude AI</div>
+    </div>
+
+    <!-- React root -->
+    <div id="root"></div>
+
+    <!--
+      ┌─────────────────────────────────────────────────────┐
+      │            SmartHR Portal — index.html              │
+      │                                                     │
+      │  This is the single HTML shell for the React SPA.  │
+      │  React is injected into <div id="root"> by         │
+      │  src/index.js via ReactDOM.createRoot().            │
+      │                                                     │
+      │  The %PUBLIC_URL% tokens below are replaced by      │
+      │  Create React App (or Vite) during the build step.  │
+      └─────────────────────────────────────────────────────┘
+    -->
+
+    <!-- Hide loader once React has mounted -->
+    <script>
+      // React signals it has mounted via a custom event or we simply
+      // hide the loader after a short delay as a safe fallback.
+      (function () {
+        var loader = document.getElementById('app-loader');
+
+        // Hide loader when React root has rendered its first child
+        var observer = new MutationObserver(function (mutations) {
+          mutations.forEach(function (mutation) {
+            if (mutation.addedNodes.length > 0) {
+              loader.classList.add('hidden');
+              observer.disconnect();
+            }
+          });
+        });
+
+        observer.observe(document.getElementById('root'), { childList: true });
+
+        // Absolute fallback: hide after 5 seconds no matter what
+        setTimeout(function () {
+          if (loader && !loader.classList.contains('hidden')) {
+            loader.classList.add('hidden');
+          }
+        }, 5000);
+      })();
+    </script>
+  </body>
+</html>
