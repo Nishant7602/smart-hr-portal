@@ -1,30 +1,30 @@
 package com.hrportal.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-/**
- * Catch-all controller for React SPA routes.
- * Any non-API, non-static request returns index.html
- * so React Router can handle client-side routing.
- */
 @Controller
 public class SpaController {
 
     @RequestMapping(value = {
         "/",
         "/login",
+        "/register", 
         "/dashboard",
         "/jobs",
-        "/apply/{id}",
+        "/jobs/**",
+        "/apply/**",
         "/candidates",
-        "/candidates/{id}",
+        "/candidates/**",
         "/interviews",
+        "/interviews/**",
         "/offers",
-        "/settings",
-        "/profile"
+        "/offers/**",
+        "/profile",
+        "/settings"
     })
-    public String forward() {
+    public String forward(HttpServletRequest request) {
         return "forward:/index.html";
     }
 }

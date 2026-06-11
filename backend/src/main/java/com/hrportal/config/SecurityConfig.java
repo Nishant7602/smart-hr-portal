@@ -42,14 +42,14 @@ public class SecurityConfig {
             .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
             	    .requestMatchers("/api/auth/**").permitAll()
-            	    .requestMatchers("/apply/**").permitAll()   // ← add this
+            	    .requestMatchers("/api/jobs", "/api/jobs/**").permitAll()
+            	    .requestMatchers("/apply/**", "/jobs/**").permitAll()
             	    .requestMatchers("/", "/index.html", "/static/**",
             	            "/*.js", "/*.css", "/*.ico", "/*.png",
             	            "/*.json", "/manifest.json").permitAll()
             	    .requestMatchers("/api/**").authenticated()
             	    .anyRequest().permitAll()
-            	)
-            .headers(h -> h.frameOptions(f -> f.disable()))
+            	).headers(h -> h.frameOptions(f -> f.disable()))
             .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
             .build();
     }
@@ -57,9 +57,16 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(List.of("http://localhost:3000", "http://localhost:5173", "http://localhost:3001","https://smart-hr-portal-nhtt.onrender.com"));
+        config.setAllowedOrigins(List.of("http://localhost:3000", "http://localhost:5173", "http://localhost:3001"));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
+        config.setAllowedOrigins(List.of(
+                "http://localhost:3000",
+                "http://localhost:5173",
+                "http://localhost:3001",
+                "https://smart-hr-portal-nhtt.onrender.com"   // ← add this line
+            ));
+
         config.setAllowCredentials(true);
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);
