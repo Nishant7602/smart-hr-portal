@@ -33,6 +33,3 @@ COPY --from=backend-build /app/target/*.jar app.jar
 RUN mkdir -p /app/uploads/resumes
 EXPOSE 8080
 ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","app.jar"]
-
-# Fix ajv/react-scripts conflict
-RUN npm install --legacy-peer-deps && npm install ajv@^8.0.0 --legacy-peer-deps
