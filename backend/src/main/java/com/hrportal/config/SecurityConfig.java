@@ -41,13 +41,25 @@ public class SecurityConfig {
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
             .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
+            	    // Public API
             	    .requestMatchers("/api/auth/**").permitAll()
-            	    .requestMatchers("/api/jobs", "/api/jobs/**").permitAll()
-            	    .requestMatchers("/apply/**", "/jobs/**").permitAll()
-            	    .requestMatchers("/", "/index.html", "/static/**",
-            	            "/*.js", "/*.css", "/*.ico", "/*.png",
-            	            "/*.json", "/manifest.json").permitAll()
+            	    .requestMatchers(HttpMethod.GET, "/api/jobs", "/api/jobs/**").permitAll()
+            	    .requestMatchers(HttpMethod.POST, "/api/applicants/job/**").permitAll()
+            	    .requestMatchers("/swagger-ui/**", "/api-docs/**", "/swagger-ui.html").permitAll()
+            	    .requestMatchers("/actuator/health").permitAll()
+            	    // Static files + React routes
+            	    .requestMatchers(
+            	        "/", "/index.html",
+            	        "/static/**", "/*.js", "/*.css",
+            	        "/*.ico", "/*.png", "/*.json", "/manifest.json",
+            	        "/login", "/register", "/dashboard",
+            	        "/jobs/**", "/apply/**",
+            	        "/candidates/**", "/interviews/**",
+            	        "/offers/**", "/profile", "/settings"
+            	    ).permitAll()
+            	    // Everything else under /api needs auth
             	    .requestMatchers("/api/**").authenticated()
+            	    // anyRequest() MUST BE LAST
             	    .anyRequest().permitAll()
             	).headers(h -> h.frameOptions(f -> f.disable()))
             .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
