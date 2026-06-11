@@ -5,18 +5,15 @@
 # ═══════════════════════════════════════════════════════════════
 
 # ── Stage 1: Build React Frontend ────────────────────────────
-FROM node:16-alpine AS frontend-build
+FROM node:18-alpine AS frontend-build
 WORKDIR /frontend
-
 COPY frontend/package.json frontend/package-lock.json* ./
-RUN npm install --legacy-peer-deps
-
+RUN npm install --legacy-peer-deps && npm install ajv@^8.0.0 --legacy-peer-deps
 COPY frontend/ ./
 ENV REACT_APP_API_URL=/api
 ENV CI=false
 ENV GENERATE_SOURCEMAP=false
 RUN npm run build
-
 # ── Stage 2: Build Spring Boot Backend ───────────────────────
 FROM maven:3.9.5-eclipse-temurin-17 AS backend-build
 WORKDIR /app
