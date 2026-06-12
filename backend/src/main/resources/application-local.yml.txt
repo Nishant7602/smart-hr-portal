@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    url: jdbc:jdbc:mysql://localhost:3306/hrportal?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC
+    username: root
+    password: Nish_4850
+
+app:
+  jwt:
+    secret: mySuperSecretKeyForJWTTokenGenerationThatIsAtLeast256BitsLong1234567890
+
+claude:
+  api:
+    key: AIzaSyAAg0YLvViB07hCzmGK-6IzuuoK4nUF7hM
