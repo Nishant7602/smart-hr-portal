@@ -7,7 +7,7 @@ spring:
 app:
   jwt:
     secret: mySuperSecretKeyForJWTTokenGenerationThatIsAtLeast256BitsLong1234567890
-expiration: 86400000
+  expiration: 86400000
 
 claude:
   api:
