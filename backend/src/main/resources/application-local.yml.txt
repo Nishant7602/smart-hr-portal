@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:jdbc:mysql://localhost:3306/hrportal?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC
+    url: jdbc:mysql://mysql-37a5c19f-nishantkhandelwal210400-a212.a.aivencloud.com:28131/defaultdb?useSSL=true&requireSSL=true&serverTimezone=UTC&allowPublicKeyRetrieval=true
     username: root
     password: Nish_4850
 
