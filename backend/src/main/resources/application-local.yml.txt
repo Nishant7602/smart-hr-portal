@@ -8,7 +8,14 @@ app:
   jwt:
     secret: mySuperSecretKeyForJWTTokenGenerationThatIsAtLeast256BitsLong1234567890
   expiration: 86400000
-
+jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    database-platform: org.hibernate.dialect.MySQLDialect
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
 claude:
   api:
     key: AQ.Ab8RN6KXtdZF0_xPNbc_qulXS6eVEH3h0no5UGAChFem7AeY3w
