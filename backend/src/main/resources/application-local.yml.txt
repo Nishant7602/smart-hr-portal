@@ -10,4 +10,4 @@ app:
 
 claude:
   api:
-    key: AIzaSyAAg0YLvViB07hCzmGK-6IzuuoK4nUF7hM
+    key: AQ.Ab8RN6KXtdZF0_xPNbc_qulXS6eVEH3h0no5UGAChFem7AeY3w
