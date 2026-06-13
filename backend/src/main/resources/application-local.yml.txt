@@ -2,7 +2,7 @@ spring:
   datasource:
     url: jdbc:mysql://mysql-37a5c19f-nishantkhandelwal210400-a212.a.aivencloud.com:28131/defaultdb?useSSL=true&requireSSL=true&serverTimezone=UTC&allowPublicKeyRetrieval=true
     username: avnadmin
-    password: Nish_4850
+    password: AVNS_UHWdQ-wZ1AXRq92ZtuW
 
 app:
   jwt:
