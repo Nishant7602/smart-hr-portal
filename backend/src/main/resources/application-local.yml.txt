@@ -18,4 +18,4 @@ jpa:
         dialect: org.hibernate.dialect.MySQLDialect
 claude:
   api:
-    key: AQ.Ab8RN6KXtdZF0_xPNbc_qulXS6eVEH3h0no5UGAChFem7AeY3w
+    key: AIzaSyC_yUhxZ7zBmMoWHS8Y10w7R2UEMKUVSQA
